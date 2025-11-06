@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Signup | IDVault</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Signup</h2>
+    <form method="POST" action="{{ url_for('signup', role='student') }}">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p>Already have an account?
+      <a href="{{ url_for('login', role='student') }}">Login here</a>.
+    </p>
+  </div>
+</body>
+</html>

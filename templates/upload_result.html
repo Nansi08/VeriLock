@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Upload Successful - IDVault{% endblock %}
+
+{% block content %}
+<section class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+  <div class="bg-black/40 backdrop-blur-xl p-10 rounded-3xl border border-gray-800 glow max-w-lg w-full">
+    <h1 class="text-3xl md:text-4xl font-bold text-green-400 mb-4">✅ Document Uploaded Successfully</h1>
+    <p class="text-gray-300 mb-6">Your document has been securely hashed and stored on the blockchain.</p>
+
+    <div class="text-left text-sm bg-black/30 rounded-xl p-4 border border-gray-700">
+      <p class="text-gray-400"><strong>File Name:</strong> {{ filename }}</p>
+      <p class="text-gray-400"><strong>Document Hash:</strong> <span class="text-blue-400 break-all">{{ doc_hash }}</span></p>
+      <p class="text-gray-400"><strong>Transaction Hash:</strong> <span class="text-purple-400 break-all">{{ tx_hash }}</span></p>
+    </div>
+
+    <div class="mt-8 flex justify-center gap-4">
+      <a href="/upload" class="px-6 py-2 rounded-full border border-purple-500 text-purple-400 hover:bg-purple-600 hover:text-white transition">Upload Another</a>
+      <a href="/verify" class="btn-gradient px-6 py-2 rounded-full text-white">Verify Document</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

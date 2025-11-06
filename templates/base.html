@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}VeriLock{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: radial-gradient(ellipse at top, #0b0b1f, #050510);
+        color: #e5e7eb;
+        font-family: 'Inter', sans-serif;
+        min-height: 100vh;
+      }
+      .btn-gradient {
+        background: linear-gradient(90deg, #7e22ce, #3b82f6);
+        transition: all 0.3s ease;
+      }
+      .btn-gradient:hover {
+        filter: brightness(1.2);
+        transform: translateY(-2px);
+      }
+      .glow {
+        box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+      }
+      header {
+        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.4);
+      }
+    </style>
+  </head>
+
+  <body class="flex flex-col min-h-screen">
+    <header class="w-full border-b border-gray-800 fixed top-0 z-50">
+      <nav class="max-w-7xl mx-auto flex items-center justify-between p-4">
+        <!-- Left side: VeriLock logo -->
+        <a href="{{ url_for('index') }}"
+           class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text">
+          VeriLock
+        </a>
+
+        <!-- Navigation logic -->
+        {% set page = request.endpoint %}
+        
+        {% if page in ['index', 'about', 'features'] %}
+          <!-- Show full menu on Home, About, Features -->
+          <div class="space-x-6">
+            <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white transition">Home</a>
+            <a href="{{ url_for('about') }}" class="text-gray-300 hover:text-white transition">About</a>
+            <a href="{{ url_for('features') }}" class="text-gray-300 hover:text-white transition">Features</a>
+          </div>
+        {% else %}
+          <!-- Show only Back button on all other pages -->
+          <div>
+            <button onclick="history.back()" class="text-gray-300 hover:text-white transition">
+              ← Back
+            </button>
+          </div>
+        {% endif %}
+      </nav>
+    </header>
+
+    <main class="flex-grow pt-24 pb-16">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="border-t border-gray-800 py-6 text-center text-gray-500 text-sm">
+      Built securely on Blockchain • © 2025 VeriLock
+    </footer>
+  </body>
+</html>

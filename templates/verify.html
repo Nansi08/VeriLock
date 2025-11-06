@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Verify Document - IDVault{% endblock %}
+
+{% block content %}
+<section class="flex flex-col items-center justify-center min-h-[80vh] text-center px-4">
+  <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-cyan-400 text-transparent bg-clip-text mb-6">
+    Verify Your Document
+  </h1>
+  <p class="text-gray-300 mb-10 max-w-xl">
+    Upload a file or enter its hash to check authenticity on the blockchain.
+  </p>
+
+  <!-- Verify by File -->
+  <form action="{{ url_for('verify') }}" method="POST" enctype="multipart/form-data"
+        class="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 w-full max-w-md mb-8 glow">
+    <h2 class="text-lg font-semibold text-white mb-3">Verify by File</h2>
+    <input type="file" name="file" required
+           class="w-full text-gray-200 border border-gray-700 bg-black/40 rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-green-500">
+    <button type="submit"
+            class="btn-gradient w-full py-3 rounded-full text-white font-semibold glow">
+      Verify Document
+    </button>
+  </form>
+
+  <!-- Verify by Hash -->
+  <form action="{{ url_for('verify') }}" method="POST"
+        class="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 w-full max-w-md glow">
+    <h2 class="text-lg font-semibold text-white mb-3">Verify by Hash</h2>
+    <input type="text" name="doc_hash" placeholder="Enter Document Hash"
+           class="w-full text-gray-200 border border-gray-700 bg-black/40 rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-green-500">
+    <button type="submit"
+            class="btn-gradient w-full py-3 rounded-full text-white font-semibold glow">
+      Check Authenticity
+    </button>
+  </form>
+
+  {% if verified is not none %}
+    <div class="mt-10 p-6 bg-black/50 rounded-xl border {{ 'border-green-600' if verified else 'border-red-600' }}">
+      {% if verified %}
+        <h3 class="text-green-400 text-xl font-semibold mb-2">✅ Document is Authentic</h3>
+      {% else %}
+        <h3 class="text-red-400 text-xl font-semibold mb-2">❌ Document Not Found</h3>
+      {% endif %}
+      <p class="text-gray-400 text-sm break-all">Hash: {{ doc_hash }}</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VeriLock | Blockchain Verification</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at top, #0a0a0a, #000000);
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 1000;
+    }
+
+    /* Left logo */
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(to right, #a855f7, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      flex-shrink: 0;
+    }
+
+    /* Right-side nav links */
+    nav {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a,
+    .dropbtn {
+      text-decoration: none;
+      color: #d1d5db;
+      font-weight: 500;
+      font-size: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    nav a:hover,
+    .dropbtn:hover {
+      color: #60a5fa;
+    }
+
+    /* Dropdowns */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      min-width: 180px;
+      z-index: 1001;
+    }
+
+    .dropdown-content a {
+      color: #d1d5db;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .dropdown-content a:hover {
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Hero section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      background: radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15), transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.15), transparent 50%);
+    }
+    .hero video {
+      width: 180px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(to right, #c084fc, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: auto;
+      color: #94a3b8;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .hero button {
+      margin-top: 40px;
+      padding: 14px 40px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      background: linear-gradient(to right, #8b5cf6, #3b82f6);
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: box-shadow 0.3s, transform 0.2s;
+    }
+
+    .hero button:hover {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+      transform: scale(1.05);
+    }
+
+    /* Features and About */
+    section {
+      padding: 100px 50px;
+    }
+
+    #features h2,
+    #about h2 {
+      text-align: center;
+      margin-bottom: 60px;
+      font-size: 2rem;
+      background: linear-gradient(to right, #a855f7, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .features-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      width: 300px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .feature-box h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #c084fc, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-box p {
+      font-size: 0.95rem;
+      color: #9ca3af;
+    }
+
+    #about .about-content {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1rem;
+      color: #94a3b8;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #64748b;
+      background: rgba(0, 0, 0, 0.7);
+      font-size: 0.85rem;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 30px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .features-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">VeriLock</div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+
+      <div class="dropdown">
+        <button class="dropbtn">Login ▾</button>
+        <div class="dropdown-content">
+          <a href="/login/student">Student Login</a>
+          <a href="/login/faculty">College Login</a>
+          <a href="/login/company">Company Login</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Sign Up ▾</button>
+        <div class="dropdown-content">
+          <a href="/signup/student">Student Sign Up</a>
+          <a href="/signup/faculty">College Sign Up</a>
+          <a href="/signup/company">Company Sign Up</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="hero">
+  <div class="logo-container">
+    <video autoplay loop muted playsinline class="logo-video">
+      <source src="static/VeriLock.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div>
+    <h1>Secure • Verify • Trust</h1>
+    <p>VeriLock is a blockchain-based document verification platform connecting students, colleges, and companies securely and transparently.</p>
+  </div>
+</div>
+
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="features-grid">
+      <div class="feature-box">
+        <h3>College Upload & Verify</h3>
+        <p>Colleges can verify academic documents through blockchain-backed hashing.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Student Ownership</h3>
+        <p>Students retain ownership of their verified credentials and share proof as needed.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Instant Verification</h3>
+        <p>Companies verify document authenticity in seconds — no manual checks required.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About VeriLock</h2>
+    <div class="about-content">
+      <p>VeriLock offers a decentralized, tamper-proof platform for academic credential management. It ensures that every document is verifiable, secure, and under the control of the rightful owner. Built for students, colleges, and employers alike.</p>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 VeriLock | Developed by Nansi Guru • Sakshi Agrawal • Riti Jain • Poorvi Goud
+  </footer>
+</body>
+</html>

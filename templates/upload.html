@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Upload Document - IDVault{% endblock %}
+
+{% block content %}
+<section class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+  <h1 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 text-transparent bg-clip-text mb-6">
+    Upload Your Document
+  </h1>
+  <p class="text-gray-300 mb-10 max-w-xl">
+    Securely upload your academic or identity document. The file will be hashed and stored on the blockchain for verification.
+  </p>
+
+  <form action="/upload" method="post" enctype="multipart/form-data"
+        class="bg-black/40 backdrop-blur-lg border border-gray-800 rounded-2xl p-8 w-full max-w-md glow">
+    
+    <label class="block text-left text-gray-400 mb-2 font-medium">Select Document:</label>
+    <input type="file" name="file" required
+           class="w-full text-gray-200 border border-gray-700 bg-black/40 rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-purple-500">
+
+    <button type="submit"
+            class="btn-gradient w-full py-3 rounded-full text-white font-semibold glow">
+      Upload & Verify
+    </button>
+  </form>
+</section>
+{% endblock %}
